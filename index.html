@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON BURGER</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Righteous&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --neon-pink: #FF2D78;
+  --neon-cyan: #00F5FF;
+  --neon-yellow: #FFE600;
+  --neon-green: #39FF14;
+  --neon-purple: #BF00FF;
+  --neon-red: #FF3131;
+  --dark-bg: #0a0612;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Rajdhani',sans-serif; background:var(--dark-bg); color:#fff; overflow-x:hidden; }
+
+.brick-bg {
+  background-color:#0d0818;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 18px,rgba(255,255,255,0.012) 18px,rgba(255,255,255,0.012) 19px),
+    repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(255,255,255,0.008) 38px,rgba(255,255,255,0.008) 39px);
+}
+
+.neon-pink  { color:var(--neon-pink);  text-shadow:0 0 7px var(--neon-pink),0 0 20px var(--neon-pink),0 0 45px var(--neon-pink); }
+.neon-cyan  { color:var(--neon-cyan);  text-shadow:0 0 7px var(--neon-cyan),0 0 20px var(--neon-cyan),0 0 45px var(--neon-cyan); }
+.neon-yellow{ color:var(--neon-yellow);text-shadow:0 0 7px var(--neon-yellow),0 0 20px var(--neon-yellow),0 0 45px var(--neon-yellow); }
+.neon-green { color:var(--neon-green); text-shadow:0 0 7px var(--neon-green),0 0 20px var(--neon-green),0 0 45px var(--neon-green); }
+.neon-purple{ color:var(--neon-purple);text-shadow:0 0 7px var(--neon-purple),0 0 20px var(--neon-purple),0 0 45px var(--neon-purple); }
+
+/* NEON TUBE EFFECT — imita o tubo de vidro iluminado da imagem */
+.neon-tube-pink {
+  color: #fff0f5;
+  -webkit-text-stroke: 1.5px var(--neon-pink);
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px var(--neon-pink),
+    0 0 18px var(--neon-pink),
+    0 0 40px var(--neon-pink),
+    0 0 80px rgba(255,45,120,0.4);
+}
+.neon-tube-yellow {
+  color: #fffde0;
+  -webkit-text-stroke: 1.5px var(--neon-yellow);
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px var(--neon-yellow),
+    0 0 18px var(--neon-yellow),
+    0 0 40px var(--neon-yellow),
+    0 0 80px rgba(255,230,0,0.4);
+}
+.neon-tube-cyan {
+  color: #e0feff;
+  -webkit-text-stroke: 1.5px var(--neon-cyan);
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px var(--neon-cyan),
+    0 0 18px var(--neon-cyan),
+    0 0 40px var(--neon-cyan),
+    0 0 80px rgba(0,245,255,0.4);
+}
+.neon-tube-purple {
+  color: #f5e0ff;
+  -webkit-text-stroke: 1.5px var(--neon-purple);
+  text-shadow:
+    0 0 4px #fff,
+    0 0 8px var(--neon-purple),
+    0 0 18px var(--neon-purple),
+    0 0 40px var(--neon-purple),
+    0 0 80px rgba(191,0,255,0.4);
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px; height:64px;
+  background:rgba(10,6,18,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,245,255,0.12);
+}
+.nav-logo { font-family:'Righteous',cursive; font-size:22px; color:#fff0f5; -webkit-text-stroke:1.5px var(--neon-pink); text-shadow:0 0 4px #fff,0 0 8px var(--neon-pink),0 0 20px var(--neon-pink),0 0 50px rgba(255,45,120,0.5); }
+.nav-logo span { color:#fffde0; -webkit-text-stroke:1.5px var(--neon-yellow); text-shadow:0 0 4px #fff,0 0 8px var(--neon-yellow),0 0 20px var(--neon-yellow),0 0 50px rgba(255,230,0,0.5); }
+.nav-links { display:flex; gap:28px; }
+.nav-links a { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,0.5); text-decoration:none; transition:all 0.2s; }
+.nav-links a:hover { color:var(--neon-cyan); text-shadow:0 0 8px var(--neon-cyan); }
+.nav-cta { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; letter-spacing:2px; background:transparent; color:var(--neon-pink); border:1.5px solid var(--neon-pink); box-shadow:0 0 12px rgba(255,45,120,0.35); padding:9px 22px; cursor:pointer; transition:all 0.2s; }
+.nav-cta:hover { background:rgba(255,45,120,0.12); box-shadow:0 0 24px rgba(255,45,120,0.7); }
+
+/* HERO */
+.hero {
+  margin-top:64px; min-height:90vh;
+  display:grid; grid-template-columns:1fr 1fr;
+  align-items:center; position:relative; overflow:hidden;
+}
+.hero-glow { position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 500px 400px at 70% 50%,rgba(191,0,255,0.07) 0%,transparent 70%),
+              radial-gradient(ellipse 300px 300px at 15% 80%,rgba(0,245,255,0.05) 0%,transparent 60%); }
+.hero-left { padding:80px 48px 80px 64px; position:relative; z-index:2; }
+.hero-tag { font-family:'Orbitron',monospace; font-size:10px; letter-spacing:4px; color:var(--neon-cyan); text-shadow:0 0 10px var(--neon-cyan); border:1px solid rgba(0,245,255,0.3); box-shadow:0 0 12px rgba(0,245,255,0.08); padding:7px 16px; width:fit-content; margin-bottom:28px; display:flex; align-items:center; gap:8px; }
+.hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--neon-cyan); box-shadow:0 0 8px var(--neon-cyan); animation:blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.1} }
+.hero-title { font-family:'Righteous',cursive; font-size:clamp(36px,4.5vw,62px); line-height:1.15; margin-bottom:20px; }
+.hero-sub { font-size:17px; line-height:1.7; color:rgba(255,255,255,0.55); max-width:420px; margin-bottom:36px; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-neon { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; letter-spacing:2px; background:transparent; border:2px solid; padding:13px 28px; cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s; }
+.btn-neon.pink { color:var(--neon-pink); border-color:var(--neon-pink); box-shadow:0 0 14px rgba(255,45,120,0.45); }
+.btn-neon.pink:hover { background:rgba(255,45,120,0.12); box-shadow:0 0 28px rgba(255,45,120,0.8); transform:translateY(-2px); }
+.btn-neon.cyan { color:var(--neon-cyan); border-color:rgba(0,245,255,0.4); box-shadow:0 0 8px rgba(0,245,255,0.12); }
+.btn-neon.cyan:hover { border-color:var(--neon-cyan); box-shadow:0 0 18px rgba(0,245,255,0.5); }
+.hero-stats { display:flex; gap:36px; margin-top:48px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.07); }
+.stat-num { font-family:'Orbitron',monospace; font-size:26px; font-weight:900; color:var(--neon-yellow); text-shadow:0 0 10px var(--neon-yellow); }
+.stat-label { font-size:11px; letter-spacing:2px; color:rgba(255,255,255,0.35); text-transform:uppercase; margin-top:3px; }
+
+/* HERO IMAGE */
+.hero-right { position:relative; display:flex; align-items:center; justify-content:center; z-index:2; padding:40px; }
+.hero-img-frame {
+  position:relative; width:440px; height:440px;
+}
+.hero-img-frame::before {
+  content:''; position:absolute; inset:-3px;
+  border:2px solid var(--neon-pink);
+  box-shadow:0 0 20px rgba(255,45,120,0.5),0 0 60px rgba(255,45,120,0.2),inset 0 0 20px rgba(255,45,120,0.05);
+  z-index:3; pointer-events:none;
+  clip-path: polygon(20px 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%,0% 20px);
+}
+.hero-img-frame::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(10,6,18,0.7) 0%, transparent 50%);
+  z-index:2; pointer-events:none;
+}
+.hero-img-frame img {
+  width:100%; height:100%; object-fit:cover;
+  display:block;
+  clip-path: polygon(20px 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%,0% 20px);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.hero-badge {
+  position:absolute; top:24px; right:24px; z-index:4;
+  width:84px; height:84px; border-radius:50%;
+  border:2px solid var(--neon-pink);
+  box-shadow:0 0 20px rgba(255,45,120,0.6),inset 0 0 20px rgba(255,45,120,0.08);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-family:'Orbitron',monospace; text-align:center;
+  color:var(--neon-pink); text-shadow:0 0 10px var(--neon-pink);
+  background:rgba(10,6,18,0.7);
+  animation:pulse 2s ease-in-out infinite;
+}
+.hero-badge .bd-num { font-size:22px; font-weight:900; line-height:1; }
+.hero-badge .bd-txt { font-size:8px; letter-spacing:1.5px; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 20px rgba(255,45,120,0.6),inset 0 0 20px rgba(255,45,120,0.08)} 50%{box-shadow:0 0 35px rgba(255,45,120,0.9),inset 0 0 28px rgba(255,45,120,0.12)} }
+.corner { position:absolute; width:18px; height:18px; border-color:var(--neon-cyan); border-style:solid; z-index:4; }
+.c-tl { top:0; left:0; border-width:2px 0 0 2px; box-shadow:-2px -2px 8px rgba(0,245,255,0.4); }
+.c-br { bottom:0; right:0; border-width:0 2px 2px 0; box-shadow:2px 2px 8px rgba(0,245,255,0.4); }
+
+/* TICKER */
+.promo-ticker { background:rgba(0,0,0,0.75); border-top:1px solid rgba(57,255,20,0.25); border-bottom:1px solid rgba(57,255,20,0.25); padding:12px 0; overflow:hidden; white-space:nowrap; }
+.ticker-inner { display:inline-block; animation:ticker 22s linear infinite; font-family:'Orbitron',monospace; font-size:12px; letter-spacing:3px; color:var(--neon-green); text-shadow:0 0 8px var(--neon-green); }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SEÇÕES */
+.section { padding:80px 64px; }
+.section-label { font-family:'Righteous',cursive; font-size:14px; color:#fff0f5; -webkit-text-stroke:1px var(--neon-pink); text-shadow:0 0 4px #fff,0 0 10px var(--neon-pink),0 0 25px var(--neon-pink),0 0 50px rgba(255,45,120,0.4); margin-bottom:10px; }
+.section-title { font-family:'Orbitron',monospace; font-size:clamp(22px,3vw,36px); font-weight:900; color:#fff; line-height:1.1; }
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; }
+.view-all { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:2px; color:var(--neon-cyan); text-shadow:0 0 8px var(--neon-cyan); text-decoration:none; border-bottom:1px solid rgba(0,245,255,0.35); padding-bottom:2px; }
+
+/* PROMO CARDS COM IMAGEM */
+.promo-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; }
+.promo-card {
+  position:relative; background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.07);
+  overflow:hidden; cursor:pointer; transition:all 0.3s;
+}
+.promo-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; opacity:0; transition:opacity 0.3s; z-index:2; }
+.promo-card.c1::before { background:var(--neon-cyan); box-shadow:0 0 10px var(--neon-cyan); }
+.promo-card.c2::before { background:var(--neon-yellow); box-shadow:0 0 10px var(--neon-yellow); }
+.promo-card.c3::before { background:var(--neon-green); box-shadow:0 0 10px var(--neon-green); }
+.promo-card:hover::before { opacity:1; }
+.promo-card.c1:hover { border-color:rgba(0,245,255,0.3); box-shadow:0 0 30px rgba(0,245,255,0.07); }
+.promo-card.c2:hover { border-color:rgba(255,230,0,0.3); box-shadow:0 0 30px rgba(255,230,0,0.07); }
+.promo-card.c3:hover { border-color:rgba(57,255,20,0.3); box-shadow:0 0 30px rgba(57,255,20,0.07); }
+.promo-card:hover .card-img { transform:scale(1.05); }
+
+.card-img-wrap { width:100%; height:200px; overflow:hidden; position:relative; }
+.card-img-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(10,6,18,0.85) 0%,transparent 60%); }
+.card-img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; display:block; }
+
+.card-discount {
+  position:absolute; top:14px; right:14px; z-index:3;
+  font-family:'Orbitron',monospace; font-size:11px; font-weight:700; letter-spacing:1px;
+  padding:5px 12px; border:1px solid; border-radius:2px; background:rgba(10,6,18,0.7);
+}
+.card-discount.cyan { color:var(--neon-cyan); border-color:var(--neon-cyan); box-shadow:0 0 8px rgba(0,245,255,0.3); }
+.card-discount.yellow { color:var(--neon-yellow); border-color:var(--neon-yellow); box-shadow:0 0 8px rgba(255,230,0,0.3); }
+.card-discount.green { color:var(--neon-green); border-color:var(--neon-green); box-shadow:0 0 8px rgba(57,255,20,0.3); }
+
+.card-body { padding:22px 24px 24px; }
+.promo-name { font-family:'Orbitron',monospace; font-weight:700; font-size:14px; letter-spacing:1px; margin-bottom:8px; color:#fff; }
+.promo-desc { font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:20px; line-height:1.5; }
+.promo-footer { display:flex; justify-content:space-between; align-items:center; }
+.promo-price-old { font-size:13px; color:rgba(255,255,255,0.25); text-decoration:line-through; margin-bottom:2px; }
+.promo-price { font-family:'Orbitron',monospace; font-size:22px; font-weight:900; }
+.promo-price.cyan { color:var(--neon-cyan); text-shadow:0 0 10px var(--neon-cyan); }
+.promo-price.yellow { color:var(--neon-yellow); text-shadow:0 0 10px var(--neon-yellow); }
+.promo-price.green { color:var(--neon-green); text-shadow:0 0 10px var(--neon-green); }
+.btn-card { font-family:'Orbitron',monospace; font-size:10px; font-weight:700; letter-spacing:2px; background:transparent; border:1px solid; padding:10px 18px; cursor:pointer; transition:all 0.2s; }
+.btn-card.cyan { color:var(--neon-cyan); border-color:var(--neon-cyan); }
+.btn-card.cyan:hover { background:rgba(0,245,255,0.1); box-shadow:0 0 14px rgba(0,245,255,0.35); }
+.btn-card.yellow { color:var(--neon-yellow); border-color:var(--neon-yellow); }
+.btn-card.yellow:hover { background:rgba(255,230,0,0.1); box-shadow:0 0 14px rgba(255,230,0,0.35); }
+.btn-card.green { color:var(--neon-green); border-color:var(--neon-green); }
+.btn-card.green:hover { background:rgba(57,255,20,0.1); box-shadow:0 0 14px rgba(57,255,20,0.35); }
+
+/* DESTAQUE */
+.destaque { padding:0; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; border-top:1px solid rgba(191,0,255,0.12); border-bottom:1px solid rgba(191,0,255,0.12); background:rgba(191,0,255,0.03); }
+.destaque-img-side { position:relative; min-height:500px; overflow:hidden; }
+.destaque-img-side img { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.7) saturate(1.1); }
+.destaque-img-side::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,rgba(10,6,18,0) 0%,rgba(10,6,18,0.8) 100%),linear-gradient(to top,rgba(191,0,255,0.15) 0%,transparent 60%); }
+.destaque-overlay-badge {
+  position:absolute; bottom:28px; left:28px; z-index:2;
+  font-family:'Orbitron',monospace; font-size:11px; letter-spacing:2px;
+  color:var(--neon-purple); border:1px solid rgba(191,0,255,0.4);
+  box-shadow:0 0 14px rgba(191,0,255,0.25); padding:8px 16px;
+  background:rgba(10,6,18,0.7);
+}
+.destaque-content { padding:60px 52px; position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; }
+.destaque-glow { position:absolute; right:-60px; top:50%; transform:translateY(-50%); width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(191,0,255,0.1) 0%,transparent 70%); pointer-events:none; }
+.destaque-label { font-family:'Righteous',cursive; font-size:16px; color:#f5e0ff; -webkit-text-stroke:1px var(--neon-purple); text-shadow:0 0 4px #fff,0 0 10px var(--neon-purple),0 0 25px var(--neon-purple),0 0 50px rgba(191,0,255,0.4); margin-bottom:14px; }
+.destaque-title { font-family:'Orbitron',monospace; font-size:clamp(26px,3.5vw,44px); font-weight:900; line-height:1.1; margin-bottom:16px; }
+.destaque-desc { font-size:15px; line-height:1.7; color:rgba(255,255,255,0.55); margin-bottom:24px; }
+.destaque-specs { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+.spec-item { background:rgba(255,255,255,0.03); border:1px solid rgba(191,0,255,0.18); padding:12px 14px; }
+.spec-val { font-family:'Orbitron',monospace; font-size:14px; font-weight:700; color:var(--neon-purple); text-shadow:0 0 8px var(--neon-purple); }
+.spec-key { font-size:11px; color:rgba(255,255,255,0.3); letter-spacing:1.5px; text-transform:uppercase; margin-top:2px; }
+.destaque-price-row { display:flex; align-items:baseline; gap:14px; margin-bottom:24px; }
+.destaque-old { font-size:18px; color:rgba(255,255,255,0.2); text-decoration:line-through; }
+.destaque-new { font-family:'Orbitron',monospace; font-size:46px; font-weight:900; color:var(--neon-yellow); text-shadow:0 0 15px var(--neon-yellow),0 0 40px rgba(255,230,0,0.35); }
+
+/* CATEGORIAS */
+.cats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.cat-card { border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02); overflow:hidden; cursor:pointer; transition:all 0.25s; position:relative; }
+.cat-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; opacity:0; transition:opacity 0.3s; }
+.cat-card.cc1::after { background:var(--neon-cyan); }
+.cat-card.cc2::after { background:var(--neon-red); }
+.cat-card.cc3::after { background:var(--neon-yellow); }
+.cat-card.cc4::after { background:var(--neon-green); }
+.cat-card:hover::after { opacity:1; }
+.cat-card:hover .cat-thumb { transform:scale(1.08); }
+.cat-thumb-wrap { width:100%; height:140px; overflow:hidden; position:relative; }
+.cat-thumb-wrap::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(10,6,18,0.7) 0%,transparent 60%); }
+.cat-thumb { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; display:block; }
+.cat-info { padding:14px 16px; }
+.cat-name { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#fff; }
+.cat-name.cyan { text-shadow:0 0 8px var(--neon-cyan); }
+.cat-name.red { text-shadow:0 0 8px var(--neon-red); }
+.cat-name.yellow { text-shadow:0 0 8px var(--neon-yellow); }
+.cat-name.green { text-shadow:0 0 8px var(--neon-green); }
+.cat-count { font-size:12px; color:rgba(255,255,255,0.3); margin-top:3px; }
+
+/* TRUST */
+.trust { padding:56px 64px; background:rgba(0,0,0,0.3); }
+.trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.05); }
+.trust-item { background:rgba(10,6,18,0.95); padding:28px 20px; display:flex; flex-direction:column; gap:10px; }
+.trust-icon-wrap { width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:18px; border:1px solid; border-radius:2px; }
+.trust-title { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; letter-spacing:1px; }
+.trust-desc { font-size:13px; color:rgba(255,255,255,0.4); line-height:1.5; }
+
+/* REVIEWS */
+.reviews-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; }
+.review-card { border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02); padding:26px; transition:border-color 0.25s; }
+.review-card:hover { border-color:rgba(255,45,120,0.28); }
+.review-stars { font-size:16px; margin-bottom:14px; letter-spacing:2px; color:var(--neon-yellow); text-shadow:0 0 8px var(--neon-yellow); }
+.review-text { font-size:14px; line-height:1.65; color:rgba(255,255,255,0.55); margin-bottom:20px; }
+.review-author { display:flex; align-items:center; gap:12px; }
+.review-avatar { width:36px; height:36px; border-radius:50%; border:1px solid var(--neon-pink); box-shadow:0 0 8px rgba(255,45,120,0.4); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',monospace; font-weight:700; font-size:11px; color:var(--neon-pink); }
+.review-name { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; letter-spacing:1px; color:#fff; }
+.review-loc { font-size:12px; color:rgba(255,255,255,0.3); }
+
+/* CTA */
+.cta-final { padding:72px 64px; display:flex; align-items:center; justify-content:space-between; position:relative; overflow:hidden; background:rgba(0,0,0,0.35); border-top:1px solid rgba(255,45,120,0.18); }
+.cta-bg-text { position:absolute; right:-10px; top:50%; transform:translateY(-50%); font-family:'Righteous',cursive; font-size:110px; color:rgba(255,45,120,0.04); pointer-events:none; white-space:nowrap; }
+.cta-title { font-family:'Righteous',cursive; font-size:clamp(24px,3vw,42px); color:#fff0f5; -webkit-text-stroke:1.5px var(--neon-pink); text-shadow:0 0 4px #fff,0 0 10px var(--neon-pink),0 0 25px var(--neon-pink),0 0 60px rgba(255,45,120,0.45); line-height:1.2; }
+.cta-sub { font-size:16px; color:rgba(255,255,255,0.45); margin-top:10px; }
+
+/* FOOTER */
+footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); padding:36px 64px; display:flex; justify-content:space-between; align-items:center; }
+.footer-logo { font-family:'Righteous',cursive; font-size:20px; color:#fff0f5; -webkit-text-stroke:1.5px var(--neon-pink); text-shadow:0 0 4px #fff,0 0 8px var(--neon-pink),0 0 20px var(--neon-pink),0 0 45px rgba(255,45,120,0.5); }
+.footer-logo span { color:#fffde0; -webkit-text-stroke:1.5px var(--neon-yellow); text-shadow:0 0 4px #fff,0 0 8px var(--neon-yellow),0 0 20px var(--neon-yellow),0 0 45px rgba(255,230,0,0.5); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:1.5px; color:rgba(255,255,255,0.3); text-decoration:none; transition:all 0.2s; }
+.footer-links a:hover { color:var(--neon-cyan); text-shadow:0 0 8px var(--neon-cyan); }
+.footer-copy { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:1px; color:rgba(255,255,255,0.18); }
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .promo-grid{grid-template-columns:1fr}
+  .cats-grid{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .destaque{grid-template-columns:1fr}
+  .section,.trust,.cta-final{padding:60px 24px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .cta-final{flex-direction:column;gap:28px;text-align:center}
+  footer{flex-direction:column;gap:20px;text-align:center;padding:32px 24px}
+}
+
+/* ===== SURVEY ===== */
+.survey-section {
+  padding: 80px 64px;
+  border-top: 1px solid rgba(0,245,255,0.12);
+  position: relative;
+}
+.survey-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+.survey-header { margin-bottom: 40px; }
+.survey-tag {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  border: 1px solid rgba(0,245,255,0.3);
+  padding: 6px 14px; width: fit-content;
+  margin-bottom: 20px;
+}
+.survey-title {
+  font-family: 'Righteous', cursive;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.1; margin-bottom: 14px;
+}
+.survey-desc {
+  font-size: 15px; color: rgba(255,255,255,0.45);
+  line-height: 1.6; margin-bottom: 24px;
+}
+.survey-progress-bar {
+  height: 3px; background: rgba(255,255,255,0.07);
+  border-radius: 2px; overflow: hidden; margin-bottom: 6px;
+}
+.survey-progress-fill {
+  height: 100%; width: 14.28%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+.survey-progress-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+}
+
+/* Cards de perguntas */
+.survey-card {
+  display: none;
+  animation: fadeSlide .35s ease;
+}
+.survey-card.active { display: block; }
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.q-tag {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 8px var(--neon-yellow);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.q-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px; font-weight: 600;
+  color: #fff; line-height: 1.4;
+  margin-bottom: 28px;
+}
+
+/* NPS */
+.nps-labels {
+  display: flex; justify-content: space-between;
+  font-size: 11px; letter-spacing: 1px;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 10px;
+}
+.nps-grid {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.nps-btn {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px; font-weight: 700;
+  width: 52px; height: 52px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  cursor: pointer; transition: all 0.18s;
+}
+.nps-btn.nps-mid  { border-color: rgba(255,230,0,0.2); color: rgba(255,230,0,0.6); }
+.nps-btn.nps-good { border-color: rgba(57,255,20,0.2); color: rgba(57,255,20,0.6); }
+.nps-btn:hover, .nps-btn.selected {
+  background: rgba(0,245,255,0.1);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 14px rgba(0,245,255,0.35);
+  transform: translateY(-2px);
+}
+.nps-btn.nps-mid:hover, .nps-btn.nps-mid.selected {
+  background: rgba(255,230,0,0.1);
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+  box-shadow: 0 0 14px rgba(255,230,0,0.35);
+}
+.nps-btn.nps-good:hover, .nps-btn.nps-good.selected {
+  background: rgba(57,255,20,0.1);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 14px rgba(57,255,20,0.35);
+}
+
+/* Choice buttons */
+.choice-grid { display: grid; gap: 12px; margin-bottom: 8px; }
+.choice-grid.col2 { grid-template-columns: 1fr 1fr; }
+.choice-grid.col1 { grid-template-columns: 1fr; }
+.col-span { grid-column: 1 / -1; }
+.choice-btn {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 600;
+  text-align: left; padding: 14px 18px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer; transition: all 0.18s;
+  line-height: 1.3;
+}
+.choice-btn:hover {
+  background: rgba(255,45,120,0.08);
+  border-color: rgba(255,45,120,0.4);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255,45,120,0.15);
+  transform: translateX(4px);
+}
+.choice-btn.selected {
+  background: rgba(255,45,120,0.12);
+  border-color: var(--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(255,45,120,0.3);
+}
+.choice-btn.multi.selected {
+  background: rgba(0,245,255,0.1);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 14px rgba(0,245,255,0.25);
+  transform: none;
+}
+
+/* Textarea */
+.survey-textarea {
+  width: 100%; min-height: 130px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff; font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; padding: 16px 18px;
+  resize: vertical; outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+.survey-textarea:focus {
+  border-color: rgba(0,245,255,0.4);
+  box-shadow: 0 0 16px rgba(0,245,255,0.1);
+}
+.survey-textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+/* Nav buttons */
+.survey-nav {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.survey-btn-back {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  background: transparent; border: none;
+  color: rgba(255,255,255,0.25);
+  cursor: pointer; transition: color 0.2s;
+  padding: 10px 0;
+}
+.survey-btn-back:hover:not(:disabled) { color: rgba(255,255,255,0.6); }
+.survey-btn-back:disabled { opacity: 0.2; cursor: default; }
+.survey-btn-next {
+  font-family: 'Orbitron', monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 14px rgba(0,245,255,0.3);
+  padding: 13px 32px; cursor: pointer;
+  transition: all 0.2s;
+}
+.survey-btn-next:hover {
+  background: rgba(0,245,255,0.1);
+  box-shadow: 0 0 28px rgba(0,245,255,0.6);
+  transform: translateY(-2px);
+}
+
+/* Tela de obrigado */
+.thanks-wrap {
+  text-align: center; padding: 40px 20px;
+  animation: fadeSlide .5s ease;
+}
+.thanks-icon {
+  font-size: 64px; margin-bottom: 24px;
+  display: block;
+  animation: bounceIn .6s cubic-bezier(.4,0,.2,1);
+}
+@keyframes bounceIn {
+  0%   { transform: scale(0.4); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.coupon-box {
+  display: inline-flex; align-items: center; gap: 0;
+  border: 2px solid var(--neon-pink);
+  box-shadow: 0 0 24px rgba(255,45,120,0.4);
+  margin: 24px 0 12px; overflow: hidden;
+}
+.coupon-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.04);
+  padding: 12px 14px;
+  border-right: 1px solid rgba(255,45,120,0.3);
+}
+.coupon-code {
+  font-family: 'Orbitron', monospace;
+  font-size: 22px; font-weight: 900;
+  color: var(--neon-pink);
+  text-shadow: 0 0 12px var(--neon-pink);
+  padding: 10px 20px; letter-spacing: 4px;
+}
+.coupon-copy {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  background: var(--neon-pink);
+  border: none; color: #fff;
+  padding: 0 18px; cursor: pointer;
+  height: 100%; transition: all 0.2s;
+  align-self: stretch; min-height: 52px;
+}
+.coupon-copy:hover { background: #ff5599; }
+.thanks-small {
+  font-size: 12px; letter-spacing: 1px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 4px;
+}
+
+@media(max-width:900px){
+  .survey-section { padding: 60px 24px; }
+  .choice-grid.col2 { grid-template-columns: 1fr; }
+  .nps-grid { gap: 6px; }
+  .nps-btn { width: 44px; height: 44px; font-size: 12px; }
+}
+</style>
+</head>
+<body class="brick-bg">
+
+<nav>
+  <div class="nav-logo">Neon<span>🍔</span>Burger</div>
+  <div class="nav-links">
+    <a href="#">Cardápio</a>
+    <a href="#">Promoções</a>
+    <a href="#">Sobre</a>
+    <a href="#">Unidades</a>
+  </div>
+  <button class="nav-cta">PEDIR AGORA</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero brick-bg">
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="hero-tag">NOVO LANÇAMENTO 2026</div>
+    <h1 class="hero-title">
+      <span class="neon-tube-pink">O FUTURO</span><br>
+      <span class="neon-tube-yellow">TEM SABOR</span><br>
+      <span style="font-family:'Orbitron',monospace;font-size:0.38em;letter-spacing:6px;color:rgba(255,255,255,0.28);font-weight:400">EST. 2024 · SÃO PAULO</span>
+    </h1>
+    <p class="hero-sub">Hambúrgueres premium com ingredientes selecionados. Tecnologia no preparo, autenticidade no sabor.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-neon pink">PEÇA AGORA →</a>
+      <a href="#" class="btn-neon cyan">Ver Cardápio</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">12k+</div><div class="stat-label">Pedidos entregues</div></div>
+      <div><div class="stat-num">4.9★</div><div class="stat-label">Avaliação média</div></div>
+      <div><div class="stat-num">30min</div><div class="stat-label">Entrega média</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-frame">
+      <div class="corner c-tl"></div>
+      <div class="corner c-br"></div>
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Hambúrguer artesanal suculento" onerror="this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80'">
+      <div class="hero-badge">
+        <span class="bd-num">-40%</span>
+        <span class="bd-txt">HOJE SÓ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="promo-ticker">
+  <span class="ticker-inner">
+    &nbsp;&nbsp;⚡ FRETE GRÁTIS ACIMA DE R$49 &nbsp;·&nbsp; 🍟 COMBO DUPLO R$29,90 &nbsp;·&nbsp; 🔥 EDIÇÃO LIMITADA: SMASH NEON &nbsp;·&nbsp; ⭐ GANHE PONTOS EM CADA PEDIDO &nbsp;·&nbsp; 💥 DESCONTO 40% NO PRIMEIRO PEDIDO &nbsp;·&nbsp; ⚡ FRETE GRÁTIS ACIMA DE R$49 &nbsp;·&nbsp; 🍟 COMBO DUPLO R$29,90 &nbsp;·&nbsp; 🔥 EDIÇÃO LIMITADA: SMASH NEON &nbsp;·&nbsp; ⭐ GANHE PONTOS EM CADA PEDIDO &nbsp;·&nbsp;
+  </span>
+</div>
+
+<!-- PROMOÇÕES -->
+<section class="section brick-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">// Ofertas deliciosas!</div>
+      <h2 class="section-title">PROMOÇÕES<br>DO DIA</h2>
+    </div>
+    <a href="#" class="view-all">VER TODAS →</a>
+  </div>
+  <div class="promo-grid">
+
+    <div class="promo-card c1">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&q=80" alt="Duplo Smash" onerror="this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&q=80'">
+        <div class="card-discount cyan">-40%</div>
+      </div>
+      <div class="card-body">
+        <div class="promo-name">DUPLO SMASH</div>
+        <div class="promo-desc">Dois smash burgers com queijo americano, cebola caramelizada e molho especial.</div>
+        <div class="promo-footer">
+          <div>
+            <div class="promo-price-old">R$ 49,90</div>
+            <div class="promo-price cyan">R$ 29,90</div>
+          </div>
+          <button class="btn-card cyan">PEDIR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-card c2">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&q=80" alt="Combo Família" onerror="this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&q=80'">
+        <div class="card-discount yellow">COMBO</div>
+      </div>
+      <div class="card-body">
+        <div class="promo-name">COMBO FAMÍLIA</div>
+        <div class="promo-desc">4 hambúrgueres + 4 batatas fritas + 4 refrigerantes. Ideal para compartilhar.</div>
+        <div class="promo-footer">
+          <div>
+            <div class="promo-price-old">R$ 139,90</div>
+            <div class="promo-price yellow">R$ 89,90</div>
+          </div>
+          <button class="btn-card yellow">PEDIR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-card c3">
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&q=80" alt="Neon Classic" onerror="this.src='https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=500&q=80'">
+        <div class="card-discount green">NOVO</div>
+      </div>
+      <div class="card-body">
+        <div class="promo-name">NEON CLASSIC</div>
+        <div class="promo-desc">Burger + batata G + milkshake à sua escolha. O clássico elevado ao próximo nível.</div>
+        <div class="promo-footer">
+          <div>
+            <div class="promo-price-old">R$ 52,90</div>
+            <div class="promo-price green">R$ 39,90</div>
+          </div>
+          <button class="btn-card green">PEDIR</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DESTAQUE BLACK EDITION -->
+<section class="destaque brick-bg">
+  <div class="destaque-img-side">
+    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=700&q=80" alt="Black Edition Burger" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&q=80'">
+    <div class="destaque-overlay-badge">EDIÇÃO LIMITADA</div>
+  </div>
+  <div class="destaque-content">
+    <div class="destaque-glow"></div>
+    <div class="destaque-label">// Lançamento Limitado</div>
+    <h2 class="destaque-title">
+      <span class="neon-purple">NEON</span><br>
+      <span class="neon-pink">BLACK EDITION</span>
+    </h2>
+    <p class="destaque-desc">Pão de carvão ativado, blend 200g dry-aged 30 dias, queijo Gruyère, bacon defumado, cebola roxa confitada e molho trufado.</p>
+    <div class="destaque-specs">
+      <div class="spec-item"><div class="spec-val">200g</div><div class="spec-key">Blend premium</div></div>
+      <div class="spec-item"><div class="spec-val">30 dias</div><div class="spec-key">Dry-aged</div></div>
+      <div class="spec-item"><div class="spec-val">Gruyère</div><div class="spec-key">Queijo importado</div></div>
+      <div class="spec-item"><div class="spec-val">Trufado</div><div class="spec-key">Molho especial</div></div>
+    </div>
+    <div class="destaque-price-row">
+      <div class="destaque-old">R$ 79,90</div>
+      <div class="destaque-new">R$ 59,90</div>
+    </div>
+    <button class="btn-neon pink">GARANTIR O MEU →</button>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section class="section brick-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">// Explore o Cardápio</div>
+      <h2 class="section-title">ESCOLHA<br>O SEU</h2>
+    </div>
+  </div>
+  <div class="cats-grid">
+    <div class="cat-card cc1">
+      <div class="cat-thumb-wrap">
+        <img class="cat-thumb" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80" alt="Burgers">
+      </div>
+      <div class="cat-info"><div class="cat-name cyan">Burgers</div><div class="cat-count">14 opções</div></div>
+    </div>
+    <div class="cat-card cc2">
+      <div class="cat-thumb-wrap">
+        <img class="cat-thumb" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" alt="Combos">
+      </div>
+      <div class="cat-info"><div class="cat-name red">Combos</div><div class="cat-count">8 combos</div></div>
+    </div>
+    <div class="cat-card cc3">
+      <div class="cat-thumb-wrap">
+        <img class="cat-thumb" src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400&q=80" alt="Bebidas">
+      </div>
+      <div class="cat-info"><div class="cat-name yellow">Bebidas</div><div class="cat-count">12 opções</div></div>
+    </div>
+    <div class="cat-card cc4">
+      <div class="cat-thumb-wrap">
+        <img class="cat-thumb" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80" alt="Sobremesas">
+      </div>
+      <div class="cat-info"><div class="cat-name green">Sobremesas</div><div class="cat-count">6 opções</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust brick-bg">
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon-wrap" style="border-color:rgba(0,245,255,0.3);color:var(--neon-cyan)">⚡</div>
+      <div class="trust-title neon-cyan">ENTREGA RÁPIDA</div>
+      <div class="trust-desc">Média de 30 minutos. Rastreie seu pedido em tempo real pelo app.</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap" style="border-color:rgba(57,255,20,0.3);color:var(--neon-green)">🛡️</div>
+      <div class="trust-title neon-green">GARANTIA TOTAL</div>
+      <div class="trust-desc">Não gostou? Devolvemos 100% do valor sem burocracia.</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap" style="border-color:rgba(255,230,0,0.3);color:var(--neon-yellow)">🌿</div>
+      <div class="trust-title neon-yellow">FRESQUINHO</div>
+      <div class="trust-desc">Fornecedores locais, sem conservantes. Carne moída na hora todo dia.</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap" style="border-color:rgba(255,45,120,0.3);color:var(--neon-pink)">⭐</div>
+      <div class="trust-title neon-pink">FIDELIDADE</div>
+      <div class="trust-desc">Acumule pontos e troque por burgers grátis. Quanto mais pede, mais ganha.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section brick-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">// O que nossos clientes dizem</div>
+      <h2 class="section-title">AVALIAÇÕES<br>REAIS</h2>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Melhor hambúrguer que já comi em São Paulo. O Black Edition é surreal. Nunca mais pedi de outro lugar."</p>
+      <div class="review-author">
+        <div class="review-avatar">MF</div>
+        <div><div class="review-name">MARCOS F.</div><div class="review-loc">Pinheiros, SP</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Chegou em 25 minutos e ainda quente. O combo família sustentou todo mundo e sobrou. Vale cada centavo."</p>
+      <div class="review-author">
+        <div class="review-avatar">JS</div>
+        <div><div class="review-name">JULIANA S.</div><div class="review-loc">Vila Madalena, SP</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"A carne do Duplo Smash é absurdamente boa. Crosta perfeita, suculenta por dentro. Viro cliente fiel com certeza."</p>
+      <div class="review-author">
+        <div class="review-avatar">RO</div>
+        <div><div class="review-name">RAFAEL O.</div><div class="review-loc">Moema, SP</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final brick-bg">
+  <div class="cta-bg-text">Neon Burger</div>
+  <div style="position:relative;z-index:1">
+    <h2 class="cta-title">Pronto para<br>Experimentar?</h2>
+    <p class="cta-sub">Peça agora e ganhe frete grátis no primeiro pedido.</p>
+  </div>
+  <button class="btn-neon pink" style="position:relative;z-index:1;font-size:13px;padding:16px 36px">FAZER MEU PEDIDO →</button>
+</section>
+
+<!-- PESQUISA DE SATISFAÇÃO -->
+<section class="survey-section brick-bg" id="pesquisa">
+  <div class="survey-wrap">
+
+    <!-- Tela: Pesquisa -->
+    <div id="survey-screen">
+      <div class="survey-header">
+        <div class="survey-tag">// PÓS-COMPRA</div>
+        <h2 class="survey-title neon-tube-cyan">SUA OPINIÃO<br><span class="neon-tube-pink">IMPORTA</span></h2>
+        <p class="survey-desc">Leva menos de 1 minuto. Nos ajude a entregar uma experiência ainda melhor.</p>
+        <div class="survey-progress-bar"><div class="survey-progress-fill" id="progress-fill"></div></div>
+        <div class="survey-progress-label"><span id="progress-label">Pergunta 1 de 7</span></div>
+      </div>
+
+      <!-- Q1: NPS -->
+      <div class="survey-card active" data-q="1">
+        <div class="q-tag">Experiência Geral</div>
+        <div class="q-text">De 0 a 10, o quanto você recomendaria o Neon Burger para um amigo?</div>
+        <div class="nps-row">
+          <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria muito</span></div>
+          <div class="nps-grid" id="nps-grid">
+            <button class="nps-btn" onclick="selectNPS(this,0)">0</button>
+            <button class="nps-btn" onclick="selectNPS(this,1)">1</button>
+            <button class="nps-btn" onclick="selectNPS(this,2)">2</button>
+            <button class="nps-btn" onclick="selectNPS(this,3)">3</button>
+            <button class="nps-btn" onclick="selectNPS(this,4)">4</button>
+            <button class="nps-btn" onclick="selectNPS(this,5)">5</button>
+            <button class="nps-btn" onclick="selectNPS(this,6)">6</button>
+            <button class="nps-btn nps-mid" onclick="selectNPS(this,7)">7</button>
+            <button class="nps-btn nps-mid" onclick="selectNPS(this,8)">8</button>
+            <button class="nps-btn nps-good" onclick="selectNPS(this,9)">9</button>
+            <button class="nps-btn nps-good" onclick="selectNPS(this,10)">10</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2: Facilidade de uso -->
+      <div class="survey-card" data-q="2">
+        <div class="q-tag">Experiência de Uso</div>
+        <div class="q-text">Encontrar e finalizar seu pedido foi fácil?</div>
+        <div class="choice-grid col2">
+          <button class="choice-btn" onclick="selectChoice(this)">😤 Muito difícil</button>
+          <button class="choice-btn" onclick="selectChoice(this)">😕 Um pouco confuso</button>
+          <button class="choice-btn" onclick="selectChoice(this)">😐 Neutro</button>
+          <button class="choice-btn" onclick="selectChoice(this)">😊 Fácil e intuitivo</button>
+          <button class="choice-btn col-span" onclick="selectChoice(this)">🚀 Extremamente fácil, sem atrito nenhum</button>
+        </div>
+      </div>
+
+      <!-- Q3: Credibilidade -->
+      <div class="survey-card" data-q="3">
+        <div class="q-tag">Credibilidade</div>
+        <div class="q-text">O site transmitiu confiança para você concluir a compra?</div>
+        <div class="choice-grid col1">
+          <button class="choice-btn" onclick="selectChoice(this)">❌ Não, fiquei desconfiado</button>
+          <button class="choice-btn" onclick="selectChoice(this)">🤔 Tive dúvidas, mas continuei</button>
+          <button class="choice-btn" onclick="selectChoice(this)">✅ Sim, pareceu confiável</button>
+          <button class="choice-btn" onclick="selectChoice(this)">🛡️ Muito confiável, me senti seguro</button>
+        </div>
+      </div>
+
+      <!-- Q4: Design -->
+      <div class="survey-card" data-q="4">
+        <div class="q-tag">Influência do Design</div>
+        <div class="q-text">O visual do site influenciou sua decisão de comprar?</div>
+        <div class="choice-grid col1">
+          <button class="choice-btn" onclick="selectChoice(this)">🙈 Não liguei para o visual</button>
+          <button class="choice-btn" onclick="selectChoice(this)">😐 Pouco. Minha decisão foi pelo produto mesmo</button>
+          <button class="choice-btn" onclick="selectChoice(this)">✨ Sim, o design me deu mais vontade de comprar</button>
+          <button class="choice-btn" onclick="selectChoice(this)">🔥 Muito! O visual me impressionou e ajudou a decidir</button>
+        </div>
+      </div>
+
+      <!-- Q5: Motivo de conclusão -->
+      <div class="survey-card" data-q="5">
+        <div class="q-tag">Motivo da Compra</div>
+        <div class="q-text">O que mais te motivou a concluir o pedido? (pode escolher até 2)</div>
+        <div class="choice-grid col2" id="multi-q5">
+          <button class="choice-btn multi" onclick="selectMulti(this,'q5')">🍔 O produto em si</button>
+          <button class="choice-btn multi" onclick="selectMulti(this,'q5')">💰 Preço / promoção</button>
+          <button class="choice-btn multi" onclick="selectMulti(this,'q5')">⭐ Avaliações dos clientes</button>
+          <button class="choice-btn multi" onclick="selectMulti(this,'q5')">🚀 Entrega rápida</button>
+          <button class="choice-btn multi" onclick="selectMulti(this,'q5')">🎨 Visual do site</button>
+          <button class="choice-btn multi col-span" onclick="selectMulti(this,'q5')">🛡️ Transmitiu segurança / credibilidade</button>
+        </div>
+      </div>
+
+      <!-- Q6: Quase desistiu? -->
+      <div class="survey-card" data-q="6">
+        <div class="q-tag">Fricção na Jornada</div>
+        <div class="q-text">Em algum momento você pensou em desistir da compra?</div>
+        <div class="choice-grid col1">
+          <button class="choice-btn" onclick="selectChoice(this)">✅ Não, foi tudo tranquilo</button>
+          <button class="choice-btn" onclick="selectChoice(this)">💳 Sim — tive dúvida no pagamento</button>
+          <button class="choice-btn" onclick="selectChoice(this)">🔍 Sim — faltou informação sobre o produto</button>
+          <button class="choice-btn" onclick="selectChoice(this)">😵 Sim — o processo foi confuso</button>
+          <button class="choice-btn" onclick="selectChoice(this)">💸 Sim — o preço me fez hesitar</button>
+        </div>
+      </div>
+
+      <!-- Q7: Comentário livre -->
+      <div class="survey-card" data-q="7">
+        <div class="q-tag">Comentário Livre</div>
+        <div class="q-text">Tem algo que podemos melhorar? Pode ser bem direto. 👇</div>
+        <textarea class="survey-textarea" id="free-text" placeholder="Ex: gostei muito do visual, mas senti falta de mais fotos dos ingredientes…"></textarea>
+      </div>
+
+      <div class="survey-nav">
+        <button class="survey-btn-back" id="btn-back" onclick="prevQuestion()" disabled>← VOLTAR</button>
+        <button class="survey-btn-next" id="btn-next" onclick="nextQuestion()">PRÓXIMA →</button>
+      </div>
+    </div>
+
+    <!-- Tela: Obrigado -->
+    <div id="thanks-screen" style="display:none">
+      <div class="thanks-wrap">
+        <div class="thanks-icon">🍔</div>
+        <h2 class="survey-title neon-tube-yellow">VALEU DEMAIS!</h2>
+        <p class="survey-desc">Sua opinião vai direto para o nosso time.<br>Como agradecimento — <strong style="color:var(--neon-pink)">15% OFF</strong> na sua próxima compra:</p>
+        <div class="coupon-box">
+          <span class="coupon-label">SEU CUPOM</span>
+          <span class="coupon-code" id="coupon-code">NEON15</span>
+          <button class="coupon-copy" onclick="copyCoupon()">COPIAR</button>
+        </div>
+        <p class="thanks-small">Válido por 7 dias · Use no próximo pedido</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Neon<span>🍔</span>Burger</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">WhatsApp</a>
+    <a href="#">iFood</a>
+    <a href="#">Contato</a>
+  </div>
+  <div class="footer-copy">© 2026 Neon Burger · São Paulo</div>
+</footer>
+
+<script>
+const TOTAL = 7;
+let current = 1;
+const answers = {};
+
+function updateUI() {
+  document.querySelectorAll('.survey-card').forEach(c => c.classList.remove('active'));
+  const card = document.querySelector(`.survey-card[data-q="${current}"]`);
+  if (card) card.classList.add('active');
+  document.getElementById('progress-fill').style.width = (current / TOTAL * 100) + '%';
+  document.getElementById('progress-label').textContent = `Pergunta ${current} de ${TOTAL}`;
+  document.getElementById('btn-back').disabled = current === 1;
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = current === TOTAL ? 'ENVIAR →' : 'PRÓXIMA →';
+}
+
+function selectNPS(btn, val) {
+  document.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[1] = val;
+}
+
+function selectChoice(btn) {
+  const card = btn.closest('.survey-card');
+  card.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[current] = btn.textContent.trim();
+}
+
+function selectMulti(btn, group) {
+  const card = btn.closest('.survey-card');
+  const selected = card.querySelectorAll('.choice-btn.selected');
+  if (btn.classList.contains('selected')) {
+    btn.classList.remove('selected');
+  } else {
+    if (selected.length < 2) btn.classList.add('selected');
+  }
+  answers[current] = Array.from(card.querySelectorAll('.choice-btn.selected')).map(b => b.textContent.trim());
+}
+
+function nextQuestion() {
+  if (current === TOTAL) {
+    submitSurvey(); return;
+  }
+  if (current < TOTAL) { current++; updateUI(); }
+}
+
+function prevQuestion() {
+  if (current > 1) { current--; updateUI(); }
+}
+
+function submitSurvey() {
+  document.getElementById('survey-screen').style.display = 'none';
+  document.getElementById('thanks-screen').style.display = 'block';
+  console.log('Respostas da pesquisa:', answers);
+}
+
+function copyCoupon() {
+  const code = document.getElementById('coupon-code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.coupon-copy');
+    btn.textContent = '✓ COPIADO';
+    setTimeout(() => btn.textContent = 'COPIAR', 2000);
+  });
+}
+
+async function submitSurvey() {
+  document.getElementById('survey-screen').style.display = 'none';
+  document.getElementById('thanks-screen').style.display = 'block';
+
+  console.log('Respostas da pesquisa:', answers);
+
+  await fetch("/api/form.js", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      nps: answers[1],
+      q2: answers[2],
+      q3: answers[3],
+      q4: answers[4],
+      q5: answers[5],
+      q6: answers[6],
+      freeText: document.getElementById("free-text").value,
+      timestamp: new Date().toISOString()
+    })
+  });
+}
+
+updateUI();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEON BURGER</title>
+<title>CYBER BURGUER</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Righteous&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -62,7 +62,14 @@ nav {
   border-bottom:1px solid rgba(0,245,255,0.12);
 }
 .nav-logo { display:flex; align-items:center; gap:8px; font-size:24px; font-weight:bold; }
-.logo-icon { width:50%; margin:5px; }
+.logo-icon {
+ width: 150px;
+ max-height: 64px;
+ height: auto;
+ object-fit: contain;
+ margin: 5px;
+ display: block;
+}
 .nav-logo span { color:#fffde0; -webkit-text-stroke:1.5px var(--neon-yellow); text-shadow:0 0 4px #fff,0 0 8px var(--neon-yellow),0 0 20px var(--neon-yellow),0 0 50px rgba(255,230,0,0.5); }
 .nav-links { display:flex; gap:28px; }
 .nav-links a { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,0.5); text-decoration:none; transition:all 0.2s; }
@@ -600,6 +607,14 @@ footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); paddin
   .cart-drawer { width:100%; }
   .form-row { grid-template-columns:1fr; }
 }
+.footer-logo-img {
+ width: 140px;
+ max-height: 60px;
+ height: auto;
+ object-fit: contain;
+ display: block;
+}
+
 </style>
 </head>
 <body class="brick-bg">
@@ -762,8 +777,8 @@ footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); paddin
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="data:image/png;base64," alt="Logo Burger" class="logo-icon" onerror="this.style.display='none'">
-    <span>NEON BURGER</span>
+    <img src="logo.jpeg" alt="Cyber Burguer" class="logo-icon">
+    <span>CYBER BURGUER</span>
   </div>
   <div class="nav-links">
     <a href="#cardapio">Cardápio</a>
@@ -1032,7 +1047,7 @@ footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); paddin
 
 <!-- CTA FINAL -->
 <section class="cta-final brick-bg">
-  <div class="cta-bg-text">Cyber Burger</div>
+  <div class="cta-bg-text">Cyber Burguer</div>
   <div style="position:relative;z-index:1">
     <h2 class="cta-title">Pronto para<br>Experimentar?</h2>
     <p class="cta-sub">Peça agora e ganhe frete grátis no primeiro pedido.</p>
@@ -1053,7 +1068,7 @@ footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); paddin
       </div>
       <div class="survey-card active" data-q="1">
         <div class="q-tag">Experiência Geral</div>
-        <div class="q-text">De 0 a 10, o quanto você recomendaria o Cyber Burger para um amigo?</div>
+        <div class="q-text">De 0 a 10, o quanto você recomendaria o Cyber Burguer para um amigo?</div>
         <div class="nps-row">
           <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria muito</span></div>
           <div class="nps-grid" id="nps-grid">
@@ -1155,14 +1170,14 @@ footer { background:#050309; border-top:1px solid rgba(255,255,255,0.05); paddin
 
 <!-- FOOTER -->
 <footer id="footer">
-  <div class="footer-logo">Cyber<span>🍔</span>Burger</div>
+  <div class="footer-logo"><img src="logo.jpeg" alt="Cyber Burguer" class="footer-logo-img"></div>
   <div class="footer-links">
     <a href="#">Instagram</a>
     <a href="#">WhatsApp</a>
     <a href="#">iFood</a>
     <a href="#">Contato</a>
   </div>
-  <div class="footer-copy">© 2026 Cyber Burger · São Paulo</div>
+  <div class="footer-copy">© 2026 Cyber Burguer · São Paulo</div>
 </footer>
 
 <script>

@@ -1,4 +1,4 @@
-# 🍔 Neon Burger — Landing Page + Pesquisa de Satisfação
+# 🍔 Cyber Burguer — Landing Page + Pesquisa de Satisfação
 
 Este projeto é uma **landing page completa de hamburgueria premium** com visual futurista/neon, incluindo **seções de marketing, catálogo e uma pesquisa interativa pós-compra**.
 

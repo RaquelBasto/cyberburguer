@@ -1,60 +1,81 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  try {
-    const {
-      nps,
-      q2,
-      q3,
-      q4,
-      q5,
-      q6,
-      freeText,
-      timestamp
-    } = req.body;
-
-    // 🔎 validação básica (evita lixo)
-    if (nps === undefined) {
-      return res.status(400).json({ error: "NPS é obrigatório" });
+    if (req.method !== "POST") {
+        return res.status(405).json({ error: "Method not allowed" });
     }
 
-    // 🧠 estrutura final do dado (organizado)
-    const submission = {
-      nps: Number(nps),
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
-      experiencia_uso: q2 || null,
-      credibilidade: q3 || null,
-      design: q4 || null,
-      motivo_compra: q5 || [],
-      friccao: q6 || null,
+    if (!supabaseUrl || !supabaseKey) {
+        console.error("Supabase não configurado.");
+        return res.status(500).json({
+            error: "Supabase não configurado"
+        });
+    }
 
-      comentario: freeText || "",
+    try {
+        const { nps, q2, q3, q4, q5, q6, freeText, timestamp, pageUrl } = req.body || {};
 
-      meta: {
-        timestamp: timestamp || new Date().toISOString(),
-        userAgent: req.headers["user-agent"] || null,
-        ip: req.headers["x-forwarded-for"] || req.socket.remoteAddress
-      }
-    };
+        const npsNumber = Number(nps);
 
-    // 🧪 log (Vercel Functions → aparece nos logs)
-    console.log("📩 Nova resposta recebida:", submission);
+        if (!Number.isInteger(npsNumber) || npsNumber < 0 || npsNumber > 10) {
+            return res.status(400).json({
+                error: "NPS inválido"
+            });
+        }
 
-    // 💾 FUTURO: aqui você conecta banco (Vercel KV, Supabase, etc.)
-    // await kv.lpush("neon-burger-surveys", submission);
+        const row = {
+            nps: npsNumber,
+            experiencia_uso: q2 || null,
+            credibilidade: q3 || null,
+            design: q4 || null,
+            motivo_compra: Array.isArray(q5) ? q5 : [],
+            friccao: q6 || null,
+            comentario: freeText || null,
+            pagina: pageUrl || null,
+            user_agent: req.headers["user-agent"] || null,
+            raw_payload: {
+                nps,
+                q2,
+                q3,
+                q4,
+                q5,
+                q6,
+                freeText,
+                timestamp: timestamp || new Date().toISOString()
+            }
+        };
 
-    return res.status(200).json({
-      success: true,
-      message: "Resposta recebida com sucesso"
-    });
+        const response = await fetch(`${supabaseUrl}/rest/v1/avaliacoes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": supabaseKey,
+                "Authorization": `Bearer ${supabaseKey}`,
+                "Prefer": "return=minimal"
+            },
+            body: JSON.stringify(row)
+        });
 
-  } catch (error) {
-    console.error("Erro no form:", error);
+        if (!response.ok) {
+            const details = await response.text();
+            console.error("Erro Supabase:", details);
 
-    return res.status(500).json({
-      error: "Erro interno ao processar formulário"
-    });
-  }
+            return res.status(500).json({
+                error: "Erro ao salvar no Supabase",
+                details
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Avaliação salva no Supabase"
+        });
+    } catch (error) {
+        console.error("Erro no form:", error);
+
+        return res.status(500).json({
+            error: "Erro interno ao processar formulário"
+        });
+    }
 }
